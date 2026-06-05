@@ -267,13 +267,13 @@ function loadDashboard() {
   } else {
     tbody.innerHTML = recent.map((e, i) => `
       <tr>
-        <td>${fmtDate(e.timestamp)}</td>
-        <td><strong>${esc(e.name || '—')}</strong></td>
-        <td><a href="tel:${e.phone}">${esc(e.phone || '—')}</a></td>
-        <td>${esc(e.type || '—')}</td>
-        <td>${esc(e.budget || '—')}</td>
-        <td><span class="status-badge ${e.status || 'new'}">${e.status === 'read' ? 'Read' : 'New'}</span></td>
-        <td><button class="table-action-btn" onclick="openModal(${enquiries.length - 1 - i})">View</button></td>
+        <td data-label="Date">${fmtDate(e.timestamp)}</td>
+        <td data-label="Name"><strong>${esc(e.name || '—')}</strong></td>
+        <td data-label="Phone"><a href="tel:${e.phone}">${esc(e.phone || '—')}</a></td>
+        <td data-label="Property">${esc(e.type || '—')}</td>
+        <td data-label="Budget">${esc(e.budget || '—')}</td>
+        <td data-label="Status"><span class="status-badge ${e.status || 'new'}">${e.status === 'read' ? 'Read' : 'New'}</span></td>
+        <td data-label="Action"><button class="table-action-btn" onclick="openModal(${enquiries.length - 1 - i})">View</button></td>
       </tr>
     `).join('');
   }
@@ -301,15 +301,15 @@ function renderEnquiriesTable(filter = 'all', search = '') {
     const idx = all.findIndex(x => x.timestamp === e.timestamp && x.name === e.name);
     return `
     <tr>
-      <td>${all.length - idx}</td>
-      <td style="white-space:nowrap">${fmtDate(e.timestamp)}</td>
-      <td><strong>${esc(e.name || '—')}</strong></td>
-      <td><a href="tel:${e.phone}" style="color:var(--gold)">${esc(e.phone || '—')}</a></td>
-      <td>${esc(e.type || '—')}</td>
-      <td>${esc(e.budget || '—')}</td>
-      <td><div class="msg-truncate" title="${esc(e.message || '')}">${esc(e.message || '—')}</div></td>
-      <td><span class="status-badge ${e.status || 'new'}">${e.status === 'read' ? 'Read' : 'New'}</span></td>
-      <td><button class="table-action-btn" onclick="openModal(${idx})">View</button></td>
+      <td data-label="#">${all.length - idx}</td>
+      <td data-label="Date" style="white-space:nowrap">${fmtDate(e.timestamp)}</td>
+      <td data-label="Name"><strong>${esc(e.name || '—')}</strong></td>
+      <td data-label="Phone"><a href="tel:${e.phone}" style="color:var(--gold)">${esc(e.phone || '—')}</a></td>
+      <td data-label="Property">${esc(e.type || '—')}</td>
+      <td data-label="Budget">${esc(e.budget || '—')}</td>
+      <td data-label="Message"><div class="msg-truncate" title="${esc(e.message || '')}">${esc(e.message || '—')}</div></td>
+      <td data-label="Status"><span class="status-badge ${e.status || 'new'}">${e.status === 'read' ? 'Read' : 'New'}</span></td>
+      <td data-label="Action"><button class="table-action-btn" onclick="openModal(${idx})">View</button></td>
     </tr>
   `}).join('');
 }

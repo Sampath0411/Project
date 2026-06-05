@@ -602,6 +602,73 @@ button { font-family: var(--font); }
   
   .data-table th, .data-table td { padding: .6rem .8rem; }
   .bar-chart { padding: 1rem; gap: 0.35rem; }
+
+  /* Table Reflow to Cards for Mobile */
+  .data-table.reflow,
+  .data-table.reflow thead,
+  .data-table.reflow tbody,
+  .data-table.reflow th,
+  .data-table.reflow td,
+  .data-table.reflow tr {
+    display: block;
+  }
+  
+  .data-table.reflow thead {
+    display: none;
+  }
+  
+  .data-table.reflow tr {
+    margin-bottom: 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--white);
+    padding: 0.25rem 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  }
+  
+  .data-table.reflow tr:hover td {
+    background: transparent;
+  }
+  
+  .data-table.reflow td {
+    border: none;
+    border-bottom: 1px solid #f1f5f9;
+    position: relative;
+    padding: 0.6rem 1rem 0.6rem 40% !important;
+    text-align: right;
+    white-space: normal !important;
+    min-height: 2.25rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  
+  .data-table.reflow td:last-child {
+    border-bottom: none;
+  }
+  
+  .data-table.reflow td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 35%;
+    font-weight: 700;
+    text-align: left;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .data-table.reflow .msg-truncate {
+    max-width: 140px;
+    text-align: right;
+  }
 }
 
 @media (max-width: 480px) {
