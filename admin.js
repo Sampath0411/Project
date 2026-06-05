@@ -124,6 +124,11 @@ function switchView(viewId) {
     viewId === 'enquiries' ? 'Enquiries' : 'Visitor Analytics';
   if (viewId === 'enquiries') renderEnquiriesTable();
   if (viewId === 'visitors')  renderVisitorsView();
+  
+  // Close mobile sidebar on view switch
+  if (typeof closeSidebarMobile === 'function') {
+    closeSidebarMobile();
+  }
 }
 
 sidebarLinks.forEach(link => {
@@ -161,10 +166,8 @@ function toggleSidebar() {
 }
 
 function closeSidebarMobile() {
-  if (window.innerWidth <= 900) {
-    sidebar.classList.remove('open');
-    sidebarOverlay.classList.remove('active');
-  }
+  sidebar.classList.remove('open');
+  sidebarOverlay.classList.remove('active');
 }
 
 // Toggle button click handler
@@ -182,10 +185,8 @@ if (sidebarOverlay) {
 
 // Click outside sidebar to close (fallback)
 document.addEventListener('click', (e) => {
-  if (window.innerWidth <= 900) {
-    if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
-      closeSidebarMobile();
-    }
+  if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
+    closeSidebarMobile();
   }
 });
 
@@ -350,7 +351,7 @@ function renderVisitorsView() {
     return `<tr>
       <td>${label}</td>
       <td><strong>${count}</strong></td>
-      <td><span class="log-bar" style="width:${Math.max(4, pct * 2)}px"></span></td>
+      <td><span class="log-bar" style="width:${Math.max(4, pct)}%"></span></td>
     </tr>`;
   }).join('');
   if (visits.length === 0) tbody.innerHTML = '<tr class="empty-row"><td colspan="3">No visit data yet.</td></tr>';
