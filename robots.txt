@@ -1,0 +1,11 @@
+# Pranav Sai Real Estate Consultancy — robots.txt
+# Replace pranavsairealestate.in with your actual domain
+
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /admin.js
+Disallow: /admin.css
+
+# Point Google to your sitemap for faster indexing
+Sitemap: https://pranavsairealestate.in/sitemap.xml

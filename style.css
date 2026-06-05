@@ -1166,7 +1166,7 @@ svg {
 
 .prop-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
 }
 
@@ -2407,13 +2407,36 @@ svg {
 /* ============================================================
    VERY SMALL SCREENS (≤360px)
    ============================================================ */
+/* ── FOOTER LINKS: horizontal layout ── */
+.footer-links-col ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .45rem 1.4rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links-col ul li a {
+  font-size: .84rem;
+  color: rgba(255,255,255,.45);
+  transition: color .2s;
+  white-space: nowrap;
+}
+
+.footer-links-col ul li a:hover {
+  color: var(--gold-light);
+}
+
 @media (max-width: 360px) {
   .hero-title { font-size: 1.9rem; }
   .why-grid { grid-template-columns: 1fr; }
   .footer-top { grid-template-columns: 1fr; }
   .trust-grid { grid-template-columns: 1fr 1fr; }
   .hero-badge { font-size: .62rem; padding: .4rem .9rem; }
+  .footer-links-col ul { gap: .35rem 1rem; }
 }
+
 
 /* ============================================================
    PRIORITY ADDITIONS — v3.1

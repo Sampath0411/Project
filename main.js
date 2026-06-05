@@ -7,7 +7,17 @@
 
 'use strict';
 
-/* ── LOADER ── */
+/* ── ADMIN TRACKING: record this page visit ── */
+(function trackVisit() {
+  try {
+    const visits = JSON.parse(localStorage.getItem('ps_visit_logs') || '[]');
+    visits.push({ date: new Date().toISOString() });
+    /* Keep max 5000 records */
+    if (visits.length > 5000) visits.splice(0, visits.length - 5000);
+    localStorage.setItem('ps_visit_logs', JSON.stringify(visits));
+  } catch(e) {}
+})();
+
 window.addEventListener('load', () => {
   setTimeout(() => {
     const loader = document.getElementById('loader');
@@ -461,21 +471,36 @@ const form = document.getElementById('contact-form');
 if (form) {
   form.addEventListener('submit', e => {
     e.preventDefault();
-    const btn = document.getElementById('form-submit');
+    const btn       = document.getElementById('form-submit');
     const successEl = document.getElementById('form-success');
 
-    // Basic validation
-    const name  = form.querySelector('#cf-name');
-    const phone = form.querySelector('#cf-phone');
+    const name    = form.querySelector('#cf-name');
+    const phone   = form.querySelector('#cf-phone');
+    const type    = form.querySelector('#cf-type');
+    const budget  = form.querySelector('#cf-budget');
+    const message = form.querySelector('#cf-message');
+
     if (name && !name.value.trim()) { name.focus(); return; }
     if (phone && !phone.value.trim()) { phone.focus(); return; }
 
-    if (btn) {
-      btn.textContent = 'Sending…';
-      btn.disabled = true;
-    }
+    if (btn) { btn.textContent = 'Sending…'; btn.disabled = true; }
 
     setTimeout(() => {
+      /* ── Save enquiry to localStorage for admin panel ── */
+      try {
+        const enquiries = JSON.parse(localStorage.getItem('ps_enquiries') || '[]');
+        enquiries.push({
+          timestamp: new Date().toISOString(),
+          name:    name    ? name.value.trim()    : '',
+          phone:   phone   ? phone.value.trim()   : '',
+          type:    type    ? type.value           : '',
+          budget:  budget  ? budget.value         : '',
+          message: message ? message.value.trim() : '',
+          status: 'new',
+        });
+        localStorage.setItem('ps_enquiries', JSON.stringify(enquiries));
+      } catch(err) {}
+
       if (successEl) successEl.classList.add('visible');
       if (btn) {
         btn.innerHTML = 'Send Enquiry <svg width="17" height="17"><use href="#ico-send"/></svg>';
@@ -495,16 +520,31 @@ const floatCta = document.getElementById('float-cta');
 function toggleFloatCta() {
   if (!floatCta) return;
   const isMobile = window.innerWidth <= 768;
-  if (isMobile) {
-    floatCta.classList.remove('visible');
-    return;
-  }
-  if (window.scrollY > 300) {
-    floatCta.classList.add('visible');
-  } else {
-    floatCta.classList.remove('visible');
-  }
+  if (isMobile) { floatCta.classList.remove('visible'); return; }
+  if (window.scrollY > 300) floatCta.classList.add('visible');
+  else floatCta.classList.remove('visible');
 }
+
+/* ── ADMIN TRACKING: phone & WhatsApp clicks ── */
+document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+  link.addEventListener('click', () => {
+    try {
+      const clicks = JSON.parse(localStorage.getItem('ps_phone_clicks') || '[]');
+      clicks.push({ date: new Date().toISOString() });
+      localStorage.setItem('ps_phone_clicks', JSON.stringify(clicks));
+    } catch(e) {}
+  });
+});
+
+document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
+  link.addEventListener('click', () => {
+    try {
+      const clicks = JSON.parse(localStorage.getItem('ps_wa_clicks') || '[]');
+      clicks.push({ date: new Date().toISOString() });
+      localStorage.setItem('ps_wa_clicks', JSON.stringify(clicks));
+    } catch(e) {}
+  });
+});
 
 window.addEventListener('resize', toggleFloatCta, { passive: true });
 toggleFloatCta(); // initial call
@@ -523,10 +563,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     }
   });
 });
-
-/* ═══════════════════════════════════════════════════
-   PRIORITY FEATURES — Added in v3.1
-   ═══════════════════════════════════════════════════ */
 
 /* ── GA4 EVENT TRACKING ──
    Works automatically once you replace G-XXXXXXXXXX
