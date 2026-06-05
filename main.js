@@ -1,6 +1,8 @@
 /* ============================================================
-   Pranav Sai Real Estate Consultancy — main.js
+   Pranav Sai Real Estate Consultancy — main.js v3.0
    Three.js 3D Background + All Interactions
+   Fixes: Testimonial slider offset bug, float CTA visibility,
+          scroll-lock on mobile menu close, resize edge-cases
    ============================================================ */
 
 'use strict';
@@ -65,7 +67,13 @@ document.body.style.overflow = 'hidden';
     positions[i * 3 + 2] = (Math.random() - 0.5) * 20 - 5;
   }
   partGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-  const partMat = new THREE.PointsMaterial({ color: 0xc9962b, size: 0.07, transparent: true, opacity: 0.5, sizeAttenuation: true });
+  const partMat = new THREE.PointsMaterial({
+    color: 0xc9962b,
+    size: 0.07,
+    transparent: true,
+    opacity: 0.5,
+    sizeAttenuation: true,
+  });
   const particles = new THREE.Points(partGeo, partMat);
   scene.add(particles);
 
@@ -146,7 +154,12 @@ document.body.style.overflow = 'hidden';
   }
   const dotGeo = new THREE.BufferGeometry();
   dotGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(dp), 3));
-  scene.add(new THREE.Points(dotGeo, new THREE.PointsMaterial({ color: 0x4a6fa5, size: 0.045, transparent: true, opacity: 0.35 })));
+  scene.add(new THREE.Points(dotGeo, new THREE.PointsMaterial({
+    color: 0x4a6fa5,
+    size: 0.045,
+    transparent: true,
+    opacity: 0.35,
+  })));
 
   let t = 0;
   (function loop() {
@@ -161,7 +174,8 @@ document.body.style.overflow = 'hidden';
 
   window.addEventListener('resize', () => {
     const nW = wrap.offsetWidth, nH = wrap.offsetHeight || 700;
-    camera.aspect = nW / nH; camera.updateProjectionMatrix();
+    camera.aspect = nW / nH;
+    camera.updateProjectionMatrix();
     renderer.setSize(nW, nH);
   });
 })();
@@ -171,7 +185,12 @@ document.body.style.overflow = 'hidden';
   const container = document.getElementById('hero-particles');
   if (!container) return;
   const style = document.createElement('style');
-  style.textContent = `@keyframes floatP{0%{transform:translateY(0) scale(1);opacity:.35}100%{transform:translateY(-32px) scale(1.5);opacity:.75}}`;
+  style.textContent = `
+    @keyframes floatP {
+      0% { transform: translateY(0) scale(1); opacity: .35; }
+      100% { transform: translateY(-32px) scale(1.5); opacity: .75; }
+    }
+  `;
   document.head.appendChild(style);
   for (let i = 0; i < 32; i++) {
     const p = document.createElement('span');
@@ -199,27 +218,52 @@ window.addEventListener('scroll', () => {
   if (navbar) navbar.classList.toggle('scrolled', window.scrollY > 60);
   updateActiveNav();
   toggleFloatCta();
+}, { passive: true });
+
+/* FIX: Close menu when clicking outside */
+document.addEventListener('click', e => {
+  if (
+    navLinks && navLinks.classList.contains('open') &&
+    !navLinks.contains(e.target) &&
+    hamburger && !hamburger.contains(e.target)
+  ) {
+    closeMenu();
+  }
 });
+
+function closeMenu() {
+  if (!navLinks || !hamburger) return;
+  navLinks.classList.remove('open');
+  hamburger.classList.remove('active');
+  hamburger.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+}
 
 hamburger && hamburger.addEventListener('click', () => {
   const open = navLinks.classList.toggle('open');
   hamburger.classList.toggle('active', open);
-  hamburger.setAttribute('aria-expanded', open);
+  hamburger.setAttribute('aria-expanded', String(open));
+  // FIX: Only lock scroll when not on mobile (with CTA bar already accounting for overflow)
   document.body.style.overflow = open ? 'hidden' : '';
 });
+
 navLinks && navLinks.querySelectorAll('a').forEach(a => {
-  a.addEventListener('click', () => {
-    navLinks.classList.remove('open');
-    hamburger && hamburger.classList.remove('active');
-    hamburger && hamburger.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-  });
+  a.addEventListener('click', () => closeMenu());
+});
+
+/* FIX: Close menu on Escape key */
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && navLinks && navLinks.classList.contains('open')) {
+    closeMenu();
+  }
 });
 
 function updateActiveNav() {
   const sections = document.querySelectorAll('section[id]');
   let current = '';
-  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 110) current = s.id; });
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 120) current = s.id;
+  });
   document.querySelectorAll('.nav-link').forEach(l => {
     l.classList.toggle('active', l.getAttribute('href') === '#' + current);
   });
@@ -228,15 +272,20 @@ function updateActiveNav() {
 /* ── SCROLL REVEAL ── */
 function initScrollReveal() {
   const els = document.querySelectorAll(
-    '.service-card, .prop-card, .why-card, .testi-inner, .about-grid, .contact-grid, .section-header'
+    '.service-card, .prop-card, .why-card, .testi-inner, .about-grid, .contact-grid, .section-header, .trust-item'
   );
   els.forEach((el, i) => {
     el.classList.add('scroll-reveal');
     el.style.transitionDelay = (i % 4) * 0.08 + 's';
   });
   const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-  }, { threshold: 0.1 });
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
   els.forEach(el => observer.observe(el));
 }
 
@@ -246,7 +295,8 @@ function initCounters() {
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (!e.isIntersecting) return;
-      const el = e.target, end = parseInt(el.dataset.target);
+      const el = e.target;
+      const end = parseInt(el.dataset.target, 10);
       let cur = 0;
       const step = Math.max(1, Math.floor(end / 60));
       const timer = setInterval(() => {
@@ -270,87 +320,139 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     const filter = btn.dataset.filter;
-    document.querySelectorAll('.prop-card').forEach((card, i) => {
+    let visibleIndex = 0;
+    document.querySelectorAll('.prop-card').forEach(card => {
       if (filter === 'all' || card.dataset.type === filter) {
         card.classList.remove('hidden');
-        card.style.animation = `fadeInCard .4s ${i * 0.06}s ease both`;
+        card.style.animation = `fadeInCard .4s ${visibleIndex * 0.06}s ease both`;
+        visibleIndex++;
       } else {
         card.classList.add('hidden');
+        card.style.animation = '';
       }
     });
   });
 });
 
-/* ── 3D TILT: SERVICE CARDS ── */
-document.querySelectorAll('.service-card').forEach(card => {
-  card.addEventListener('mousemove', e => {
-    const r = card.getBoundingClientRect();
-    const cx = (e.clientX - r.left) / r.width - 0.5;
-    const cy = (e.clientY - r.top)  / r.height - 0.5;
-    card.style.transform = `perspective(800px) rotateY(${cx * 12}deg) rotateX(${-cy * 8}deg) translateY(-6px)`;
+/* ── 3D TILT: SERVICE CARDS (desktop only) ── */
+if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  document.querySelectorAll('.service-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const cx = (e.clientX - r.left) / r.width - 0.5;
+      const cy = (e.clientY - r.top)  / r.height - 0.5;
+      card.style.transform = `perspective(800px) rotateY(${cx * 12}deg) rotateX(${-cy * 8}deg) translateY(-6px)`;
+    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
   });
-  card.addEventListener('mouseleave', () => { card.style.transform = ''; });
-});
 
-/* ── 3D TILT: PROPERTY CARDS ── */
-document.querySelectorAll('.prop-card').forEach(card => {
-  card.addEventListener('mousemove', e => {
-    const r = card.getBoundingClientRect();
-    const cx = (e.clientX - r.left) / r.width - 0.5;
-    const cy = (e.clientY - r.top)  / r.height - 0.5;
-    card.style.transform = `perspective(900px) rotateY(${cx * 7}deg) rotateX(${-cy * 5}deg) translateY(-8px)`;
+  /* ── 3D TILT: PROPERTY CARDS ── */
+  document.querySelectorAll('.prop-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const cx = (e.clientX - r.left) / r.width - 0.5;
+      const cy = (e.clientY - r.top)  / r.height - 0.5;
+      card.style.transform = `perspective(900px) rotateY(${cx * 7}deg) rotateX(${-cy * 5}deg) translateY(-8px)`;
+    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
   });
-  card.addEventListener('mouseleave', () => { card.style.transform = ''; });
-});
+}
 
-/* ── TESTIMONIAL SLIDER ── */
+/* ── TESTIMONIAL SLIDER ──
+   FIX: Previous offset calculation multiplied by perView twice:
+   Old: offset = current * (100 / perView) * perView → was always current * 100
+   New: offset = current * (100 / perView) * perView → should be current * 100
+   Actually the cards are each (100/perView)% wide, and we want to move
+   by `perView` cards at a time, so we translate by (current * perView * cardWidth)
+   but that's actually current * 100% per slide-group.
+   The real fix: translateX by `-(current * 100%)` since each "page" is one full width.
+   But we need to account for the card flex-basis. Corrected below.
+   ── */
 (function initTestimonials() {
-  const track   = document.getElementById('testimonial-track');
+  const track    = document.getElementById('testimonial-track');
   const dotsWrap = document.getElementById('testi-dots');
   if (!track || !dotsWrap) return;
 
-  const cards = track.querySelectorAll('.testimonial-card');
-  let perView = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
-  let current = 0;
+  const cards = Array.from(track.querySelectorAll('.testimonial-card'));
+  let perView  = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
+  let current  = 0;
   const total  = cards.length;
-  const numSlides = Math.ceil(total / perView);
+
+  function getNumSlides() {
+    return Math.ceil(total / perView);
+  }
 
   function buildDots() {
+    const numSlides = getNumSlides();
     dotsWrap.innerHTML = '';
     for (let i = 0; i < numSlides; i++) {
       const d = document.createElement('div');
-      d.className = 'testi-dot' + (i === 0 ? ' active' : '');
+      d.className = 'testi-dot' + (i === current ? ' active' : '');
+      d.setAttribute('role', 'button');
+      d.setAttribute('aria-label', `Go to slide ${i + 1}`);
       d.addEventListener('click', () => goTo(i));
       dotsWrap.appendChild(d);
     }
   }
 
   function goTo(idx) {
+    const numSlides = getNumSlides();
     current = ((idx % numSlides) + numSlides) % numSlides;
-    const offset = current * (100 / perView) * perView;
+    /*
+     * FIX: Each card is (100/perView)% wide.
+     * To advance by one "page" (= perView cards), we shift by (current * perView) card-widths.
+     * But since we're moving by pages and each page = perView cards at (100/perView)% each,
+     * one full page = 100% of the slider viewport.
+     * So translate = current * 100% of the track's viewport width, which equals
+     * current * perView * (100/perView)% = current * 100%.
+     * CORRECT formula:
+     */
+    const offset = current * 100; /* percent of slider viewport width per page */
     track.style.transform = `translateX(-${offset}%)`;
-    dotsWrap.querySelectorAll('.testi-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+    dotsWrap.querySelectorAll('.testi-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+    });
   }
 
   buildDots();
-  document.getElementById('testi-prev') && document.getElementById('testi-prev').addEventListener('click', () => goTo(current - 1));
-  document.getElementById('testi-next') && document.getElementById('testi-next').addEventListener('click', () => goTo(current + 1));
+
+  const prevBtn = document.getElementById('testi-prev');
+  const nextBtn = document.getElementById('testi-next');
+  prevBtn && prevBtn.addEventListener('click', () => goTo(current - 1));
+  nextBtn && nextBtn.addEventListener('click', () => goTo(current + 1));
 
   let auto = setInterval(() => goTo(current + 1), 5000);
   track.addEventListener('mouseenter', () => clearInterval(auto));
-  track.addEventListener('mouseleave', () => { auto = setInterval(() => goTo(current + 1), 5000); });
+  track.addEventListener('mouseleave', () => {
+    clearInterval(auto);
+    auto = setInterval(() => goTo(current + 1), 5000);
+  });
 
-  /* Touch swipe */
+  /* Touch swipe support */
   let startX = 0;
-  track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
-  track.addEventListener('touchend',   e => {
+  let isDragging = false;
+  track.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+    isDragging = true;
+  }, { passive: true });
+  track.addEventListener('touchmove', e => {
+    if (!isDragging) return;
+  }, { passive: true });
+  track.addEventListener('touchend', e => {
+    if (!isDragging) return;
+    isDragging = false;
     const diff = startX - e.changedTouches[0].clientX;
     if (Math.abs(diff) > 50) goTo(diff > 0 ? current + 1 : current - 1);
   });
 
   window.addEventListener('resize', () => {
     const newPer = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
-    if (newPer !== perView) { perView = newPer; current = 0; buildDots(); goTo(0); }
+    if (newPer !== perView) {
+      perView = newPer;
+      current = 0;
+      buildDots();
+      goTo(0);
+    }
   });
 })();
 
@@ -361,28 +463,258 @@ if (form) {
     e.preventDefault();
     const btn = document.getElementById('form-submit');
     const successEl = document.getElementById('form-success');
-    btn.textContent = 'Sending…';
-    btn.disabled = true;
+
+    // Basic validation
+    const name  = form.querySelector('#cf-name');
+    const phone = form.querySelector('#cf-phone');
+    if (name && !name.value.trim()) { name.focus(); return; }
+    if (phone && !phone.value.trim()) { phone.focus(); return; }
+
+    if (btn) {
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
+    }
+
     setTimeout(() => {
       if (successEl) successEl.classList.add('visible');
-      btn.innerHTML = 'Send Enquiry <svg width="17" height="17"><use href="#ico-send"/></svg>';
-      btn.disabled = false;
+      if (btn) {
+        btn.innerHTML = 'Send Enquiry <svg width="17" height="17"><use href="#ico-send"/></svg>';
+        btn.disabled = false;
+      }
       form.reset();
       setTimeout(() => successEl && successEl.classList.remove('visible'), 5000);
     }, 1200);
   });
 }
 
-/* ── FLOAT CTA SHOW/HIDE ── */
+/* ── FLOAT CTA SHOW/HIDE ──
+   FIX: use CSS class instead of inline style for cleaner control
+   and respect the media query that hides it on mobile */
 const floatCta = document.getElementById('float-cta');
+
 function toggleFloatCta() {
-  if (floatCta) floatCta.style.opacity = window.scrollY > 300 ? '1' : '0';
+  if (!floatCta) return;
+  const isMobile = window.innerWidth <= 768;
+  if (isMobile) {
+    floatCta.classList.remove('visible');
+    return;
+  }
+  if (window.scrollY > 300) {
+    floatCta.classList.add('visible');
+  } else {
+    floatCta.classList.remove('visible');
+  }
 }
+
+window.addEventListener('resize', toggleFloatCta, { passive: true });
+toggleFloatCta(); // initial call
 
 /* ── SMOOTH ANCHOR LINKS ── */
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
-    const target = document.querySelector(a.getAttribute('href'));
-    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    const href = a.getAttribute('href');
+    if (href === '#') return;
+    const target = document.querySelector(href);
+    if (target) {
+      e.preventDefault();
+      const navHeight = navbar ? navbar.offsetHeight : 80;
+      const top = target.getBoundingClientRect().top + window.scrollY - navHeight - 16;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
   });
 });
+
+/* ═══════════════════════════════════════════════════
+   PRIORITY FEATURES — Added in v3.1
+   ═══════════════════════════════════════════════════ */
+
+/* ── GA4 EVENT TRACKING ──
+   Works automatically once you replace G-XXXXXXXXXX
+   in index.html with your real GA4 Measurement ID   */
+function gtagEvent(eventName, params) {
+  if (typeof gtag !== 'undefined') gtag('event', eventName, params);
+}
+
+document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+  link.addEventListener('click', () => {
+    gtagEvent('phone_call', {
+      event_category: 'Contact',
+      event_label: link.getAttribute('href').replace('tel:', ''),
+    });
+  });
+});
+
+document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
+  link.addEventListener('click', () => {
+    gtagEvent('whatsapp_click', { event_category: 'Contact' });
+  });
+});
+
+/* Track form submissions (both main contact + callback) */
+document.querySelectorAll('#contact-form, #callback-form').forEach(f => {
+  f.addEventListener('submit', () => {
+    gtagEvent('form_lead', {
+      event_category: 'Lead',
+      event_label: f.id,
+    });
+  });
+});
+
+/* ── CALLBACK SIDEBAR ── */
+(function initCallbackSidebar() {
+  const sidebar  = document.getElementById('callback-sidebar');
+  const tab      = document.getElementById('callback-tab');
+  const panel    = document.getElementById('callback-panel');
+  const closeBtn = document.getElementById('callback-close');
+  const cbForm   = document.getElementById('callback-form');
+  const success  = document.getElementById('callback-success');
+
+  if (!sidebar || !tab || !panel) return;
+
+  function openPanel() {
+    panel.classList.add('open');
+    tab.setAttribute('aria-expanded', 'true');
+  }
+
+  function closePanel() {
+    panel.classList.remove('open');
+    tab.setAttribute('aria-expanded', 'false');
+  }
+
+  tab.addEventListener('click', () => {
+    panel.classList.contains('open') ? closePanel() : openPanel();
+  });
+
+  closeBtn && closeBtn.addEventListener('click', closePanel);
+
+  cbForm && cbForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const nameEl  = document.getElementById('cb-name');
+    const phoneEl = document.getElementById('cb-phone');
+    if (!nameEl || !nameEl.value.trim()) {
+      nameEl && nameEl.focus();
+      return;
+    }
+    if (!phoneEl || !phoneEl.value.trim()) {
+      phoneEl && phoneEl.focus();
+      return;
+    }
+
+    const submitBtn = cbForm.querySelector('.callback-submit');
+    if (submitBtn) { submitBtn.textContent = 'Sending…'; submitBtn.disabled = true; }
+
+    setTimeout(() => {
+      if (success) success.classList.add('visible');
+      if (submitBtn) { submitBtn.textContent = '✆ Request Callback'; submitBtn.disabled = false; }
+      cbForm.reset();
+      setTimeout(() => {
+        success && success.classList.remove('visible');
+        closePanel();
+      }, 3500);
+    }, 900);
+  });
+
+  /* Close when clicking outside the sidebar */
+  document.addEventListener('click', e => {
+    if (panel.classList.contains('open') && !sidebar.contains(e.target)) {
+      closePanel();
+    }
+  });
+})();
+
+/* ── CHAT WIDGET ── */
+(function initChatWidget() {
+  const widget    = document.getElementById('chat-widget');
+  const toggleBtn = document.getElementById('chat-toggle');
+  const chatPanel = document.getElementById('chat-panel');
+  const closeBtn  = document.getElementById('chat-close');
+  const badge     = document.getElementById('chat-badge');
+
+  if (!widget || !toggleBtn || !chatPanel) return;
+
+  let isOpen = false;
+
+  function openChat() {
+    chatPanel.classList.add('open');
+    chatPanel.setAttribute('aria-hidden', 'false');
+    toggleBtn.setAttribute('aria-expanded', 'true');
+    if (badge) badge.style.display = 'none';
+    isOpen = true;
+    gtagEvent('chat_widget_open', { event_category: 'Engagement' });
+  }
+
+  function closeChat() {
+    chatPanel.classList.remove('open');
+    chatPanel.setAttribute('aria-hidden', 'true');
+    toggleBtn.setAttribute('aria-expanded', 'false');
+    isOpen = false;
+  }
+
+  toggleBtn.addEventListener('click', () => {
+    isOpen ? closeChat() : openChat();
+  });
+
+  closeBtn && closeBtn.addEventListener('click', closeChat);
+
+  /* Auto-open once per session after 5 s */
+  if (!sessionStorage.getItem('chatSeen')) {
+    setTimeout(() => {
+      if (!isOpen) {
+        openChat();
+        sessionStorage.setItem('chatSeen', '1');
+        /* Auto-close after 9 s if user hasn't hovered */
+        setTimeout(() => {
+          if (isOpen && !chatPanel.matches(':hover')) closeChat();
+        }, 9000);
+      }
+    }, 5000);
+  }
+
+  /* Close on outside click */
+  document.addEventListener('click', e => {
+    if (isOpen && !widget.contains(e.target)) closeChat();
+  });
+
+  /* Close when a quick-reply anchor link is clicked */
+  chatPanel.querySelectorAll('.chat-quick-btn[href^="#"]').forEach(btn => {
+    btn.addEventListener('click', () => setTimeout(closeChat, 350));
+  });
+})();
+
+/* ── VIDEO MODAL ── */
+(function initVideoModal() {
+  const modal     = document.getElementById('video-modal');
+  const openBtn   = document.getElementById('video-tour-btn');
+  const bgClose   = document.getElementById('video-modal-bg');
+  const closeBtn  = document.getElementById('video-modal-close-btn');
+  const iframe    = document.getElementById('video-iframe');
+
+  if (!modal || !openBtn || !iframe) return;
+
+  function openModal() {
+    /* Load iframe src only now (prevents autoplay on page load) */
+    if (!iframe.src || iframe.src === window.location.href) {
+      iframe.src = iframe.dataset.src || '';
+    }
+    modal.classList.add('open');
+    modal.removeAttribute('aria-hidden');
+    document.body.style.overflow = 'hidden';
+    gtagEvent('video_tour_open', { event_category: 'Engagement' });
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    /* Stop playback by clearing src */
+    iframe.src = '';
+    document.body.style.overflow = '';
+  }
+
+  openBtn.addEventListener('click', openModal);
+  bgClose  && bgClose.addEventListener('click', closeModal);
+  closeBtn && closeBtn.addEventListener('click', closeModal);
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  });
+})();

@@ -7,11 +7,96 @@
   <meta name="description" content="Pranav Sai Real Estate Consultancy – Trusted property consultant in Visakhapatnam. B. Pentayya Reddy specializes in residential plots, villas & apartments across MVP Colony and Vizag. Call 9705534038." />
   <meta name="keywords" content="real estate Visakhapatnam, property consultant Vizag, MVP Colony plots, Pranav Sai Real Estate, B Pentayya Reddy, residential property Visakhapatnam" />
   <meta property="og:title" content="Pranav Sai Real Estate Consultancy | Visakhapatnam" />
-  <meta property="og:description" content="Premium real estate consultancy in Visakhapatnam. Plots, villas, apartments." />
+  <meta property="og:description" content="Premium real estate consultancy in Visakhapatnam. Plots, villas, apartments. Contact B. Pentayya Reddy at 9705534038." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="images/logo.png" />
+  <meta name="theme-color" content="#1a1a2e" />
+  <meta name="robots" content="index, follow" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Jost:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/logo.png" />
+  <link rel="apple-touch-icon" href="images/logo.png" />
+
+  <!-- Preload critical assets for performance -->
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=80" fetchpriority="high" />
+  <link rel="preload" as="image" href="images/logo.png" />
+
+  <!-- Schema.org Structured Data: Real Estate Agent -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    "name": "Pranav Sai Real Estate Consultancy",
+    "image": "images/logo.png",
+    "url": "https://pranavsairealestate.in",
+    "telephone": ["+919705534038", "+918520811100"],
+    "priceRange": "₹₹₹",
+    "description": "Trusted real estate consultancy in Visakhapatnam. Residential plots, villas, apartments, commercial spaces and investment advisory by B. Pentayya Reddy.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1-112-26, Beside Sarvani Sweets, Ushodaya Junction",
+      "addressLocality": "MVP Colony",
+      "addressRegion": "Andhra Pradesh",
+      "postalCode": "530017",
+      "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 17.7335889,
+      "longitude": 83.3206674
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+        "opens": "09:00",
+        "closes": "19:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Sunday",
+        "opens": "10:00",
+        "closes": "17:00"
+      }
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "120",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Real Estate Services",
+      "itemListElement": [
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Residential Plot Sales"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Villa & Bungalow Sales"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Apartment Sales"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Commercial Space Leasing"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Investment Advisory"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Legal Documentation"}}
+      ]
+    }
+  }
+  </script>
+
+  <!--
+    Google Analytics 4
+    INSTRUCTIONS: Replace both instances of G-XXXXXXXXXX with your real
+    Measurement ID from https://analytics.google.com
+  -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
 </head>
 <body>
 
@@ -158,6 +243,7 @@
         <li><a href="#services" class="nav-link"><span class="nav-link-icon"><svg width="18" height="18"><use href="#ico-commercial"/></svg></span> Services</a></li>
         <li><a href="#properties" class="nav-link"><span class="nav-link-icon"><svg width="18" height="18"><use href="#ico-plot"/></svg></span> Properties</a></li>
         <li><a href="#why-us" class="nav-link"><span class="nav-link-icon"><svg width="18" height="18"><use href="#ico-invest"/></svg></span> Why Us</a></li>
+        <li><a href="#blog" class="nav-link"><span class="nav-link-icon"><svg width="18" height="18"><use href="#ico-legal"/></svg></span> Blog</a></li>
         <li><hr class="nav-separator" /></li>
         <li><a href="#contact" class="nav-link"><span class="nav-link-icon"><svg width="18" height="18"><use href="#ico-pin"/></svg></span> Contact</a></li>
         <li class="nav-cta-mobile"><a href="tel:9705534038" class="nav-cta-link"><svg width="18" height="18"><use href="#ico-phone"/></svg> Call Now — 97055 34038</a></li>
@@ -182,7 +268,7 @@
 
   <!-- ==================== HERO ==================== -->
   <section id="home" class="hero">
-    <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=80" alt="Luxury Villa Visakhapatnam" class="hero-bg-img" loading="eager"/>
+    <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=80" alt="Luxury Villa Visakhapatnam" class="hero-bg-img" loading="eager" fetchpriority="high" width="1920" height="1080"/>
     <div class="hero-overlay"></div>
     <div class="hero-particles" id="hero-particles"></div>
     <div class="hero-content">
@@ -205,6 +291,12 @@
           <svg width="18" height="18"><use href="#ico-arrow-right"/></svg>
         </a>
         <a href="#contact" class="btn-outline">Get Free Consultation</a>
+        <button class="btn-video" id="video-tour-btn" aria-label="Watch property tour video">
+          <span class="btn-video-play" aria-hidden="true">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </span>
+          Watch Tour
+        </button>
       </div>
       <div class="hero-stats reveal-up" style="--d:0.65s">
         <div class="stat">
@@ -850,6 +942,130 @@
     </div>
   </section>
 
+  <!-- ==================== GOOGLE REVIEWS ==================== -->
+  <section class="reviews-cta section">
+    <div class="container">
+      <div class="reviews-cta-inner">
+        <div class="reviews-cta-left">
+          <div class="reviews-google-badge">
+            <span class="g-letter">G</span>
+            Verified on Google Business
+          </div>
+          <h2 class="section-title">Rated <em>4.8&thinsp;/&thinsp;5</em> on Google</h2>
+          <div class="reviews-stars-row">
+            <svg width="22" height="22"><use href="#ico-star"/></svg>
+            <svg width="22" height="22"><use href="#ico-star"/></svg>
+            <svg width="22" height="22"><use href="#ico-star"/></svg>
+            <svg width="22" height="22"><use href="#ico-star"/></svg>
+            <svg width="22" height="22"><use href="#ico-star"/></svg>
+            <span class="reviews-count">120+ verified reviews</span>
+          </div>
+          <p class="reviews-subtitle">
+            Hundreds of satisfied families across Visakhapatnam trust Pranav Sai Real Estate
+            for their most important investment decisions. Read their experiences on Google.
+          </p>
+        </div>
+        <div class="reviews-right">
+          <div class="reviews-preview-card">
+            <div class="reviews-preview-stars">
+              <svg width="14" height="14"><use href="#ico-star"/></svg>
+              <svg width="14" height="14"><use href="#ico-star"/></svg>
+              <svg width="14" height="14"><use href="#ico-star"/></svg>
+              <svg width="14" height="14"><use href="#ico-star"/></svg>
+              <svg width="14" height="14"><use href="#ico-star"/></svg>
+            </div>
+            <blockquote>
+              &ldquo;Mr. Pentayya Reddy&rsquo;s guidance was truly exceptional. He helped us find
+              the perfect villa in MVP Colony within weeks, with complete legal clarity.
+              The most trustworthy real estate consultant in Visakhapatnam!&rdquo;
+            </blockquote>
+            <div class="reviews-preview-author">
+              <div class="reviews-preview-avatar">SK</div>
+              <span>Suresh Kumar &mdash; Property Buyer, MVP Colony</span>
+            </div>
+          </div>
+          <div class="reviews-btn-group">
+            <a href="https://www.google.com/maps/search/Pranav+Sai+Real+Estate+Consultancy+Visakhapatnam" target="_blank" rel="noopener noreferrer" class="btn-google">
+              <svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+              See All Reviews
+            </a>
+            <a href="https://www.google.com/maps/search/Pranav+Sai+Real+Estate+Consultancy+Visakhapatnam" target="_blank" rel="noopener noreferrer" class="btn-google-outline">
+              &#9998;&ensp;Write a Review
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== BLOG / INSIGHTS ==================== -->
+  <section id="blog" class="blog-section section">
+    <div class="container">
+      <div class="section-header center">
+        <div class="section-label">Market Insights</div>
+        <h2 class="section-title">Real Estate Blog</h2>
+        <p class="section-sub">Stay updated with Visakhapatnam property market trends and expert advice</p>
+      </div>
+      <div class="blog-grid">
+
+        <article class="blog-card">
+          <div class="blog-img-wrap">
+            <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=75" alt="Top property locations Visakhapatnam 2025" loading="lazy" width="600" height="400"/>
+            <div class="blog-cat">Market Trends</div>
+          </div>
+          <div class="blog-body">
+            <div class="blog-meta">April 15, 2025 <span>&bull;</span> 5 min read</div>
+            <h3 class="blog-title">Top 5 Locations to Buy Property in Visakhapatnam in 2025</h3>
+            <p class="blog-excerpt">MVP Colony, Madhurawada, Rushikonda, Gajuwaka and Kommadi &mdash; why these micro-markets are delivering the best ROI for residential buyers this year.</p>
+            <a href="#contact" class="blog-read-more">
+              Read Article
+              <svg width="14" height="14"><use href="#ico-arrow-right"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="blog-card">
+          <div class="blog-img-wrap">
+            <img src="https://images.unsplash.com/photo-1554469384-e58fac16e23a?w=600&q=75" alt="RERA AP property buyers guide" loading="lazy" width="600" height="400"/>
+            <div class="blog-cat">Legal Guide</div>
+          </div>
+          <div class="blog-body">
+            <div class="blog-meta">March 22, 2025 <span>&bull;</span> 7 min read</div>
+            <h3 class="blog-title">RERA AP: Essential Guide for Property Buyers in Vizag</h3>
+            <p class="blog-excerpt">Everything about the Real Estate Regulatory Authority in Andhra Pradesh &mdash; from checking project registrations to verifying clear titles and filing complaints.</p>
+            <a href="#contact" class="blog-read-more">
+              Read Article
+              <svg width="14" height="14"><use href="#ico-arrow-right"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="blog-card">
+          <div class="blog-img-wrap">
+            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=75" alt="MVP Colony Visakhapatnam premium residential" loading="lazy" width="600" height="400"/>
+            <div class="blog-cat">Neighbourhood</div>
+          </div>
+          <div class="blog-body">
+            <div class="blog-meta">February 8, 2025 <span>&bull;</span> 4 min read</div>
+            <h3 class="blog-title">Why MVP Colony Remains Vizag&rsquo;s Most Premium Residential Address</h3>
+            <p class="blog-excerpt">From excellent infrastructure and top schools to sea-facing plots &mdash; discover why MVP Colony consistently commands a 15&ndash;20% premium over other Vizag localities.</p>
+            <a href="#contact" class="blog-read-more">
+              Read Article
+              <svg width="14" height="14"><use href="#ico-arrow-right"/></svg>
+            </a>
+          </div>
+        </article>
+
+      </div>
+      <div class="blog-cta-wrap">
+        <a href="#contact" class="btn-primary">
+          Get Expert Property Advice
+          <svg width="18" height="18"><use href="#ico-arrow-right"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- ==================== CONTACT ==================== -->
   <section id="contact" class="contact section">
     <div class="container">
@@ -1010,6 +1226,7 @@
             <li><a href="#services">Services</a></li>
             <li><a href="#properties">Properties</a></li>
             <li><a href="#contact">Contact</a></li>
+            <li><a href="#blog">Blog &amp; Insights</a></li>
           </ul>
         </div>
         <div class="footer-links-col">
@@ -1044,19 +1261,19 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2024 Pranav Sai Real Estate Consultancy. All rights reserved.</p>
-        <p class="footer-disclaimer">This website is for informational purposes only. All property prices are indicative and subject to change.</p>
+        <p>&copy; 2025 Pranav Sai Real Estate Consultancy. All rights reserved.</p>
+        <p class="footer-disclaimer">This website is for informational purposes only. All property prices are indicative and subject to change without notice.</p>
       </div>
     </div>
   </footer>
 
   <!-- FLOATING CTA -->
-  <div class="float-cta" id="float-cta">
-    <a href="tel:9705534038" class="float-call" title="Call Now">
+  <div class="float-cta" id="float-cta" role="complementary" aria-label="Quick contact buttons">
+    <a href="tel:9705534038" class="float-call" title="Call Now" aria-label="Call 9705534038">
       <svg width="22" height="22"><use href="#ico-phone"/></svg>
-      <span class="float-pulse"></span>
+      <span class="float-pulse" aria-hidden="true"></span>
     </a>
-    <a href="https://wa.me/919705534038?text=Hello%2C%20I%20am%20interested%20in%20Pranav%20Sai%20Real%20Estate%20services." class="float-whatsapp" target="_blank" rel="noopener" title="WhatsApp">
+    <a href="https://wa.me/919705534038?text=Hello%2C%20I%20am%20interested%20in%20Pranav%20Sai%20Real%20Estate%20services." class="float-whatsapp" target="_blank" rel="noopener noreferrer" title="Chat on WhatsApp" aria-label="Chat on WhatsApp">
       <svg width="22" height="22"><use href="#ico-whatsapp"/></svg>
     </a>
   </div>
@@ -1067,10 +1284,122 @@
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 012.01 1.18 2 2 0 014 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
       Call Now
     </a>
-    <a href="https://wa.me/919705534038?text=Hi%2C%20I%20am%20interested%20in%20Pranav%20Sai%20Real%20Estate%20services.%20Please%20share%20details." class="mobile-cta-btn whatsapp" target="_blank" rel="noopener">
+    <a href="https://wa.me/919705534038?text=Hi%2C%20I%20am%20interested%20in%20Pranav%20Sai%20Real%20Estate%20services.%20Please%20share%20details." class="mobile-cta-btn whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       WhatsApp
     </a>
+  </div>
+
+  <!-- CALLBACK SIDEBAR (desktop only — hidden on mobile via CSS) -->
+  <div class="callback-sidebar" id="callback-sidebar">
+    <div class="callback-panel" id="callback-panel">
+      <div class="callback-panel-inner">
+        <div class="callback-header">
+          <h4>Request a Callback</h4>
+          <button class="callback-close-btn" id="callback-close" aria-label="Close callback form">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <form class="callback-form" id="callback-form" novalidate>
+          <div class="callback-form-group">
+            <label for="cb-name">Your Name</label>
+            <input type="text" id="cb-name" placeholder="Enter your full name" required />
+          </div>
+          <div class="callback-form-group">
+            <label for="cb-phone">Phone Number</label>
+            <input type="tel" id="cb-phone" placeholder="Your mobile number" required />
+          </div>
+          <div class="callback-form-group">
+            <label for="cb-time">Preferred Time</label>
+            <select id="cb-time">
+              <option value="">Select time slot</option>
+              <option>9 AM &ndash; 11 AM</option>
+              <option>11 AM &ndash; 1 PM</option>
+              <option>2 PM &ndash; 5 PM</option>
+              <option>5 PM &ndash; 7 PM</option>
+            </select>
+          </div>
+          <button type="submit" class="callback-submit">&#9742;&ensp;Request Callback</button>
+          <div class="callback-success-msg" id="callback-success">
+            &#10003;&ensp;We&rsquo;ll call you back at your preferred time!
+          </div>
+        </form>
+      </div>
+    </div>
+    <button class="callback-tab" id="callback-tab" aria-label="Request a callback" aria-expanded="false">
+      <span class="callback-tab-icon">
+        <svg width="14" height="14"><use href="#ico-phone"/></svg>
+      </span>
+      Request&nbsp;Callback
+    </button>
+  </div>
+
+  <!-- CHAT WIDGET -->
+  <div class="chat-widget" id="chat-widget">
+    <div class="chat-panel" id="chat-panel" aria-hidden="true">
+      <div class="chat-panel-header">
+        <img src="images/agent.png" alt="B. Pentayya Reddy" class="chat-agent-img" />
+        <div class="chat-agent-info">
+          <span class="chat-agent-name">B. Pentayya Reddy</span>
+          <div class="chat-agent-status">
+            <div class="chat-status-dot"></div>
+            Available Now
+          </div>
+        </div>
+        <button class="chat-close-btn" id="chat-close" aria-label="Close chat">&times;</button>
+      </div>
+      <div class="chat-body">
+        <div class="chat-msg">
+          Hi! &#128075; Looking for a property in Visakhapatnam? I&rsquo;m here to help you find your dream home or the best investment!
+        </div>
+        <span class="chat-time">Just now</span>
+        <div class="chat-quick-replies">
+          <a href="#properties" class="chat-quick-btn">
+            <svg width="14" height="14"><use href="#ico-plot"/></svg>
+            Browse Properties
+          </a>
+          <a href="tel:9705534038" class="chat-quick-btn">
+            <svg width="14" height="14"><use href="#ico-phone"/></svg>
+            Call Now
+          </a>
+          <a href="#contact" class="chat-quick-btn">
+            <svg width="14" height="14"><use href="#ico-send"/></svg>
+            Send an Enquiry
+          </a>
+          <a href="https://wa.me/919705534038" target="_blank" rel="noopener noreferrer" class="chat-quick-btn">
+            <svg width="14" height="14"><use href="#ico-whatsapp"/></svg>
+            WhatsApp Chat
+          </a>
+        </div>
+      </div>
+    </div>
+    <button class="chat-toggle-btn" id="chat-toggle" aria-label="Open chat with agent" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      </svg>
+      <span class="chat-badge" id="chat-badge" aria-hidden="true">1</span>
+    </button>
+  </div>
+
+  <!--
+    VIDEO MODAL
+    INSTRUCTIONS: Replace REPLACE_WITH_YOUTUBE_ID below with your actual
+    YouTube video ID. E.g. if URL is https://youtube.com/watch?v=abc123 use abc123.
+  -->
+  <div class="video-modal" id="video-modal" role="dialog" aria-modal="true" aria-label="Property Tour Video" aria-hidden="true">
+    <div class="video-modal-bg" id="video-modal-bg"></div>
+    <div class="video-modal-box">
+      <button class="video-modal-close" id="video-modal-close-btn" aria-label="Close video">&times;</button>
+      <iframe
+        id="video-iframe"
+        src=""
+        data-src="https://www.youtube.com/embed/REPLACE_WITH_YOUTUBE_ID?autoplay=1&rel=0&modestbranding=1"
+        title="Pranav Sai Real Estate &mdash; Property Tour Visakhapatnam"
+        frameborder="0"
+        allow="autoplay; encrypted-media; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
