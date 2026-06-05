@@ -136,26 +136,77 @@ sidebarLinks.forEach(link => {
 /* View All button on dashboard */
 document.getElementById('view-all-btn').addEventListener('click', () => switchView('enquiries'));
 
-/* Sidebar toggle */
-const sidebar    = document.getElementById('sidebar');
-const adminMain  = document.getElementById('admin-main');
-document.getElementById('sidebar-toggle').addEventListener('click', () => {
-  sidebar.classList.toggle('collapsed');
-  adminMain.classList.toggle('full');
+/* ─── SIDEBAR & MOBILE NAVIGATION ─── */
+const sidebar        = document.getElementById('sidebar');
+const adminMain      = document.getElementById('admin-main');
+const sidebarToggle  = document.getElementById('sidebar-toggle');
+const sidebarOverlay = document.getElementById('sidebar-overlay');
+
+function toggleSidebar() {
+  const isMobile = window.innerWidth <= 900;
+  if (isMobile) {
+    const isOpen = sidebar.classList.toggle('open');
+    sidebar.classList.remove('collapsed'); // Ensure desktop class doesn't interfere
+    if (isOpen) {
+      sidebarOverlay.classList.add('active');
+    } else {
+      sidebarOverlay.classList.remove('active');
+    }
+  } else {
+    sidebar.classList.toggle('collapsed');
+    adminMain.classList.toggle('full');
+    sidebar.classList.remove('open'); // Ensure mobile class doesn't interfere
+    sidebarOverlay.classList.remove('active');
+  }
+}
+
+function closeSidebarMobile() {
+  if (window.innerWidth <= 900) {
+    sidebar.classList.remove('open');
+    sidebarOverlay.classList.remove('active');
+  }
+}
+
+// Toggle button click handler
+sidebarToggle.addEventListener('click', (e) => {
+  e.stopPropagation();
+  toggleSidebar();
 });
 
-/* Mobile sidebar */
-if (window.innerWidth <= 900) {
-  sidebar.classList.remove('collapsed');
-  document.addEventListener('click', e => {
-    if (!sidebar.contains(e.target) && sidebar.classList.contains('open')) {
-      sidebar.classList.remove('open');
-    }
-  });
-  document.getElementById('sidebar-toggle').addEventListener('click', () => {
-    sidebar.classList.toggle('open');
+// Click overlay to close
+if (sidebarOverlay) {
+  sidebarOverlay.addEventListener('click', () => {
+    closeSidebarMobile();
   });
 }
+
+// Click outside sidebar to close (fallback)
+document.addEventListener('click', (e) => {
+  if (window.innerWidth <= 900) {
+    if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
+      closeSidebarMobile();
+    }
+  }
+});
+
+// Close sidebar on link click (mobile)
+const sidebarLinksList = sidebar.querySelectorAll('.sidebar-link');
+sidebarLinksList.forEach(link => {
+  link.addEventListener('click', () => {
+    closeSidebarMobile();
+  });
+});
+
+// Window resize listener
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 900) {
+    sidebar.classList.remove('open');
+    sidebarOverlay.classList.remove('active');
+  } else {
+    sidebar.classList.remove('collapsed');
+    adminMain.classList.remove('full');
+  }
+});
 
 /* ─── DATE IN TOPBAR ─── */
 document.getElementById('topbar-date').textContent =
