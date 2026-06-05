@@ -194,7 +194,6 @@ document.body.style.overflow = 'hidden';
 const navbar    = document.getElementById('navbar');
 const hamburger = document.getElementById('hamburger');
 const navLinks  = document.getElementById('nav-links');
-const menuIco   = document.getElementById('menu-ico');
 
 window.addEventListener('scroll', () => {
   if (navbar) navbar.classList.toggle('scrolled', window.scrollY > 60);
@@ -204,16 +203,16 @@ window.addEventListener('scroll', () => {
 
 hamburger && hamburger.addEventListener('click', () => {
   const open = navLinks.classList.toggle('open');
+  hamburger.classList.toggle('active', open);
   hamburger.setAttribute('aria-expanded', open);
-  if (menuIco) menuIco.innerHTML = open
-    ? '<use href="#ico-close"/>'
-    : '<use href="#ico-menu"/>';
+  document.body.style.overflow = open ? 'hidden' : '';
 });
 navLinks && navLinks.querySelectorAll('a').forEach(a => {
   a.addEventListener('click', () => {
     navLinks.classList.remove('open');
+    hamburger && hamburger.classList.remove('active');
     hamburger && hamburger.setAttribute('aria-expanded', 'false');
-    if (menuIco) menuIco.innerHTML = '<use href="#ico-menu"/>';
+    document.body.style.overflow = '';
   });
 });
 
