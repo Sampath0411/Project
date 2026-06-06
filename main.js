@@ -627,6 +627,7 @@ document.querySelectorAll('#contact-form, #callback-form').forEach(f => {
     e.preventDefault();
     const nameEl  = document.getElementById('cb-name');
     const phoneEl = document.getElementById('cb-phone');
+    const timeEl  = document.getElementById('cb-time');
     if (!nameEl || !nameEl.value.trim()) {
       nameEl && nameEl.focus();
       return;
@@ -640,6 +641,21 @@ document.querySelectorAll('#contact-form, #callback-form').forEach(f => {
     if (submitBtn) { submitBtn.textContent = 'Sending…'; submitBtn.disabled = true; }
 
     setTimeout(() => {
+      /* ── BUG FIX: Save callback enquiry to localStorage so it appears in admin panel ── */
+      try {
+        const enquiries = JSON.parse(localStorage.getItem('ps_enquiries') || '[]');
+        enquiries.push({
+          timestamp: new Date().toISOString(),
+          name:    nameEl.value.trim(),
+          phone:   phoneEl.value.trim(),
+          type:    'Callback Request',
+          budget:  timeEl ? timeEl.value : '',
+          message: timeEl ? `Preferred callback time: ${timeEl.value || 'Not specified'}` : 'Callback request from sidebar form',
+          status:  'new',
+        });
+        localStorage.setItem('ps_enquiries', JSON.stringify(enquiries));
+      } catch(err) {}
+
       if (success) success.classList.add('visible');
       if (submitBtn) { submitBtn.textContent = '✆ Request Callback'; submitBtn.disabled = false; }
       cbForm.reset();
@@ -658,64 +674,8 @@ document.querySelectorAll('#contact-form, #callback-form').forEach(f => {
   });
 })();
 
-/* ── CHAT WIDGET ── */
-(function initChatWidget() {
-  const widget    = document.getElementById('chat-widget');
-  const toggleBtn = document.getElementById('chat-toggle');
-  const chatPanel = document.getElementById('chat-panel');
-  const closeBtn  = document.getElementById('chat-close');
-  const badge     = document.getElementById('chat-badge');
-
-  if (!widget || !toggleBtn || !chatPanel) return;
-
-  let isOpen = false;
-
-  function openChat() {
-    chatPanel.classList.add('open');
-    chatPanel.setAttribute('aria-hidden', 'false');
-    toggleBtn.setAttribute('aria-expanded', 'true');
-    if (badge) badge.style.display = 'none';
-    isOpen = true;
-    gtagEvent('chat_widget_open', { event_category: 'Engagement' });
-  }
-
-  function closeChat() {
-    chatPanel.classList.remove('open');
-    chatPanel.setAttribute('aria-hidden', 'true');
-    toggleBtn.setAttribute('aria-expanded', 'false');
-    isOpen = false;
-  }
-
-  toggleBtn.addEventListener('click', () => {
-    isOpen ? closeChat() : openChat();
-  });
-
-  closeBtn && closeBtn.addEventListener('click', closeChat);
-
-  /* Auto-open once per session after 5 s */
-  if (!sessionStorage.getItem('chatSeen')) {
-    setTimeout(() => {
-      if (!isOpen) {
-        openChat();
-        sessionStorage.setItem('chatSeen', '1');
-        /* Auto-close after 9 s if user hasn't hovered */
-        setTimeout(() => {
-          if (isOpen && !chatPanel.matches(':hover')) closeChat();
-        }, 9000);
-      }
-    }, 5000);
-  }
-
-  /* Close on outside click */
-  document.addEventListener('click', e => {
-    if (isOpen && !widget.contains(e.target)) closeChat();
-  });
-
-  /* Close when a quick-reply anchor link is clicked */
-  chatPanel.querySelectorAll('.chat-quick-btn[href^="#"]').forEach(btn => {
-    btn.addEventListener('click', () => setTimeout(closeChat, 350));
-  });
-})();
+/* ── CHAT WIDGET (removed from HTML — keeping stub for future use) ── */
+// Chat widget HTML was removed. This block intentionally left empty.
 
 /* ── VIDEO MODAL ── */
 (function initVideoModal() {

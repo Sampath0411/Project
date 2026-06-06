@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Properties for Sale | Pranav Sai Real Estate Consultancy – Visakhapatnam</title>
+  <meta name="description" content="Browse plots, villas, houses and apartments for sale in Visakhapatnam. Pranav Sai Real Estate Consultancy – B. Pentayya Reddy. Call 9705534038."/>
+  <meta name="keywords" content="plots for sale Visakhapatnam, villas Vizag, apartments Visakhapatnam, property for sale MVP Colony, Pranav Sai Real Estate"/>
+  <meta name="robots" content="index, follow"/>
+  <meta property="og:title" content="Properties for Sale | Pranav Sai Real Estate – Visakhapatnam"/>
+  <meta property="og:description" content="Browse plots, villas, houses and apartments for sale in Visakhapatnam. Call 9705534038."/>
+  <meta property="og:type" content="website"/>
+  <link rel="icon" type="image/png" href="images/logo.png"/>
+  <link rel="canonical" href="https://pranavsairealestate.in/properties.html"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold:       #c9962b;
+      --gold-light: #e8b84b;
+      --charcoal:   #1a1a2e;
+      --navy:       #16213e;
+      --white:      #ffffff;
+      --off-white:  #f8f7f4;
+      --text-1:     #1a1a2e;
+      --text-2:     #475569;
+      --text-3:     #94a3b8;
+      --border:     #e2e8f0;
+      --shadow:     0 4px 24px rgba(0,0,0,.08);
+      --shadow-lg:  0 12px 48px rgba(0,0,0,.14);
+      --radius:     14px;
+      --radius-sm:  9px;
+    }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--off-white);
+      color: var(--text-1);
+      min-height: 100vh;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; }
+
+    /* ── NAV ── */
+    .prop-nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(26,26,46,.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      padding: 0 5%;
+    }
+    .prop-nav-inner {
+      display: flex; align-items: center;
+      height: 68px; gap: 2rem;
+    }
+    .prop-nav-logo {
+      display: flex; align-items: center; gap: .8rem;
+      text-decoration: none;
+    }
+    .prop-nav-logo img {
+      width: 40px; height: 40px; border-radius: 50%;
+      object-fit: cover; border: 2px solid var(--gold);
+    }
+    .prop-nav-brand { display: flex; flex-direction: column; }
+    .nav-brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: .95rem; font-weight: 700; color: var(--gold-light);
+      line-height: 1;
+    }
+    .nav-brand-sub {
+      font-size: .62rem; color: rgba(255,255,255,.4);
+      letter-spacing: .07em; text-transform: uppercase;
+    }
+    .prop-nav-back {
+      margin-left: auto;
+      display: flex; align-items: center; gap: .5rem;
+      padding: .5rem 1.2rem;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 20px;
+      font-size: .82rem; color: rgba(255,255,255,.7);
+      text-decoration: none;
+      transition: all .25s;
+    }
+    .prop-nav-back:hover { background: rgba(201,150,43,.2); border-color: var(--gold); color: var(--gold-light); }
+    .prop-nav-call {
+      display: flex; align-items: center; gap: .5rem;
+      padding: .5rem 1.2rem;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      border-radius: 20px;
+      font-size: .82rem; font-weight: 700; color: var(--charcoal);
+      text-decoration: none;
+      transition: all .25s;
+    }
+    .prop-nav-call:hover { box-shadow: 0 6px 20px rgba(201,150,43,.4); transform: translateY(-1px); }
+
+    /* ── PAGE HEADER ── */
+    .page-hero {
+      background: linear-gradient(135deg, var(--charcoal) 0%, var(--navy) 60%, #0f172a 100%);
+      padding: 4rem 5% 3.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 60% 50%, rgba(201,150,43,.12) 0%, transparent 70%);
+    }
+    .page-hero-label {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(201,150,43,.12);
+      border: 1px solid rgba(201,150,43,.25);
+      color: var(--gold-light);
+      padding: .3rem 1.1rem;
+      border-radius: 20px;
+      font-size: .78rem; font-weight: 600;
+      letter-spacing: .08em; text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .page-hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800; color: #fff;
+      margin-bottom: .8rem; line-height: 1.15;
+    }
+    .page-hero-title span { color: var(--gold-light); }
+    .page-hero-sub {
+      font-size: 1.05rem; color: rgba(255,255,255,.55);
+      max-width: 580px; margin: 0 auto;
+    }
+
+    /* ── FILTERS & SEARCH ── */
+    .filter-bar {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 5%;
+      position: sticky; top: 68px; z-index: 80;
+      box-shadow: 0 2px 12px rgba(0,0,0,.05);
+    }
+    .filter-bar-inner {
+      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+    }
+    .filter-chips { display: flex; gap: .5rem; flex-wrap: wrap; }
+    .chip {
+      padding: .4rem 1.1rem;
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      font-size: .82rem; font-weight: 600; color: var(--text-2);
+      cursor: pointer; transition: all .2s;
+      background: transparent;
+      font-family: 'Jost', sans-serif;
+    }
+    .chip:hover { border-color: var(--gold); color: var(--gold); }
+    .chip.active { background: var(--gold); border-color: var(--gold); color: #111; }
+
+    .filter-count {
+      margin-left: auto;
+      font-size: .82rem; color: var(--text-3);
+    }
+
+    /* ── MAIN GRID ── */
+    .prop-page-main {
+      max-width: 1280px; margin: 0 auto;
+      padding: 2.5rem 5%;
+    }
+
+    .prop-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.8rem;
+    }
+
+    /* ── PROPERTY CARD ── */
+    .pcard {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      transition: transform .3s ease, box-shadow .3s ease;
+      position: relative;
+    }
+    .pcard:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+
+    .pcard-img-wrap {
+      position: relative; overflow: hidden;
+      height: 210px; background: #f1f5f9;
+    }
+    .pcard-img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .5s ease;
+      display: block;
+    }
+    .pcard:hover .pcard-img { transform: scale(1.05); }
+
+    .pcard-no-img {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: .8rem; color: var(--text-3);
+      background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+    }
+    .pcard-no-img svg { opacity: .4; }
+    .pcard-no-img span { font-size: .8rem; }
+
+    /* SOLD OUT overlay */
+    .pcard-sold-overlay {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,.65);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 2;
+    }
+    .sold-stamp {
+      color: #fff;
+      font-size: 1.5rem; font-weight: 900;
+      letter-spacing: 3px;
+      border: 3px solid #fff;
+      padding: 8px 24px;
+      transform: rotate(-18deg);
+      text-shadow: 0 2px 8px rgba(0,0,0,.5);
+      font-family: 'Jost', sans-serif;
+    }
+
+    .pcard-badge {
+      position: absolute; top: 12px; left: 12px;
+      padding: .25rem .75rem;
+      border-radius: 20px;
+      font-size: .7rem; font-weight: 800;
+      letter-spacing: .05em; text-transform: uppercase;
+      z-index: 3;
+    }
+    .badge-featured { background: var(--gold); color: #111; }
+    .badge-new      { background: #3b82f6; color: #fff; }
+    .badge-hot      { background: #f97316; color: #fff; }
+    .badge-sold     { background: #ef4444; color: #fff; }
+    .badge-available{ background: #22c55e; color: #fff; }
+
+    .pcard-type-tag {
+      position: absolute; top: 12px; right: 12px;
+      background: rgba(0,0,0,.55);
+      color: #fff;
+      padding: .25rem .75rem;
+      border-radius: 20px;
+      font-size: .7rem; font-weight: 600;
+      z-index: 3;
+    }
+
+    .pcard-enquire {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(201,150,43,.9) 0%, transparent 50%);
+      display: flex; align-items: flex-end; justify-content: center;
+      padding-bottom: 1.2rem;
+      opacity: 0; transition: opacity .3s;
+      z-index: 4;
+    }
+    .pcard:hover .pcard-enquire { opacity: 1; }
+    .pcard-enquire a {
+      background: var(--white);
+      color: var(--charcoal);
+      font-size: .82rem; font-weight: 700;
+      padding: .5rem 1.4rem;
+      border-radius: 20px;
+      transition: all .2s;
+    }
+    .pcard-enquire a:hover { background: var(--charcoal); color: var(--white); }
+
+    .pcard-body { padding: 1.1rem 1.2rem; }
+    .pcard-type { font-size: .72rem; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: .08em; margin-bottom: .3rem; }
+    .pcard-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--text-1); margin-bottom: .5rem; line-height: 1.3; }
+    .pcard-location {
+      display: flex; align-items: center; gap: .35rem;
+      font-size: .8rem; color: var(--text-2); margin-bottom: .7rem;
+    }
+    .pcard-location svg { flex-shrink: 0; }
+
+    .pcard-specs {
+      display: flex; flex-wrap: wrap; gap: .5rem;
+      margin-bottom: .8rem;
+    }
+    .pcard-spec {
+      display: flex; align-items: center; gap: .3rem;
+      font-size: .75rem; color: var(--text-2);
+      background: var(--off-white);
+      padding: .25rem .65rem;
+      border-radius: 6px;
+    }
+
+    .pcard-desc {
+      font-size: .78rem; color: var(--text-2);
+      line-height: 1.6; margin-bottom: .8rem;
+    }
+
+    .pcard-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: .8rem;
+      border-top: 1px solid var(--border);
+    }
+    .pcard-price { font-size: 1.05rem; font-weight: 800; color: var(--gold); }
+    .pcard-sold-text { font-size: .88rem; font-weight: 700; color: #ef4444; }
+
+    .pcard-cta {
+      display: flex; gap: .5rem;
+    }
+    .pcard-call {
+      display: flex; align-items: center; gap: .4rem;
+      padding: .45rem 1rem;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: #111; font-weight: 700; font-size: .78rem;
+      border-radius: 8px; text-decoration: none;
+      transition: all .2s;
+    }
+    .pcard-call:hover { box-shadow: 0 4px 14px rgba(201,150,43,.4); transform: translateY(-1px); }
+    .pcard-wa {
+      display: flex; align-items: center; gap: .4rem;
+      padding: .45rem 1rem;
+      background: #25d366;
+      color: #fff; font-weight: 700; font-size: .78rem;
+      border-radius: 8px; text-decoration: none;
+      transition: all .2s;
+    }
+    .pcard-wa:hover { background: #20b358; transform: translateY(-1px); }
+
+    /* ── NO RESULTS ── */
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center; padding: 5rem 1rem;
+      color: var(--text-3);
+    }
+    .no-results svg { opacity: .3; margin-bottom: 1rem; }
+    .no-results h3 { font-size: 1.2rem; color: var(--text-2); margin-bottom: .5rem; }
+    .no-results p { font-size: .88rem; }
+
+    /* ── CTA SECTION ── */
+    .prop-cta-section {
+      background: linear-gradient(135deg, var(--charcoal), var(--navy));
+      padding: 4rem 5%;
+      text-align: center;
+      margin-top: 3rem;
+    }
+    .prop-cta-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      color: #fff; margin-bottom: .8rem;
+    }
+    .prop-cta-section h2 span { color: var(--gold-light); }
+    .prop-cta-section p { color: rgba(255,255,255,.55); margin-bottom: 2rem; }
+    .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .cta-btn-primary {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .9rem 2rem;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: #111; font-weight: 700; font-size: .95rem;
+      border-radius: 50px; text-decoration: none;
+      transition: all .3s;
+    }
+    .cta-btn-primary:hover { box-shadow: 0 8px 28px rgba(201,150,43,.45); transform: translateY(-2px); }
+    .cta-btn-outline {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .9rem 2rem;
+      border: 1.5px solid rgba(255,255,255,.2); color: rgba(255,255,255,.8);
+      font-weight: 600; font-size: .95rem;
+      border-radius: 50px; text-decoration: none;
+      transition: all .3s;
+    }
+    .cta-btn-outline:hover { border-color: var(--gold-light); color: var(--gold-light); }
+
+    /* ── FOOTER ── */
+    .prop-footer {
+      background: var(--charcoal);
+      color: rgba(255,255,255,.4);
+      text-align: center;
+      padding: 1.5rem 5%;
+      font-size: .82rem;
+    }
+    .prop-footer a { color: var(--gold-light); }
+
+    /* ── MOBILE BOTTOM BAR ── */
+    .mobile-bar {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+      background: var(--charcoal);
+      padding: .75rem 1rem;
+      gap: .6rem;
+    }
+    .mobile-bar a {
+      flex: 1; display: flex; align-items: center; justify-content: center; gap: .5rem;
+      padding: .75rem;
+      border-radius: var(--radius-sm);
+      font-size: .88rem; font-weight: 700; text-decoration: none;
+    }
+    .mobile-bar .mb-call { background: var(--gold); color: #111; }
+    .mobile-bar .mb-wa   { background: #25d366; color: #fff; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .prop-nav-inner { gap: .8rem; }
+      .page-hero { padding: 2.5rem 5% 2rem; }
+      .prop-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+      .prop-page-main { padding: 1.5rem 4%; }
+      .filter-bar { padding: .8rem 4%; top: 62px; }
+    }
+    @media (max-width: 560px) {
+      .prop-grid { grid-template-columns: 1fr; }
+      .mobile-bar { display: flex; }
+      body { padding-bottom: 70px; }
+      .prop-nav-call { display: none; }
+    }
+    @media (max-width: 400px) {
+      .pcard-footer { flex-direction: column; align-items: flex-start; gap: .6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav class="prop-nav">
+  <div class="prop-nav-inner">
+    <a href="index.html" class="prop-nav-logo">
+      <img src="images/logo.png" alt="Pranav Sai Real Estate"/>
+      <div class="prop-nav-brand">
+        <span class="nav-brand-name">Pranav Sai</span>
+        <span class="nav-brand-sub">Real Estate Consultancy</span>
+      </div>
+    </a>
+    <a href="index.html" class="prop-nav-back">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      Back to Home
+    </a>
+    <a href="tel:9705534038" class="prop-nav-call">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 012.01 1.18 2 2 0 014 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      Call: 9705534038
+    </a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="page-hero">
+  <div class="page-hero-label">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+    Visakhapatnam's Finest Properties
+  </div>
+  <h1 class="page-hero-title">
+    Browse Our <span>Property Listings</span>
+  </h1>
+  <p class="page-hero-sub">
+    Plots, villas, houses &amp; apartments across MVP Colony and all prime locations in Vizag
+  </p>
+</section>
+
+<!-- ── FILTER BAR ── -->
+<div class="filter-bar">
+  <div class="filter-bar-inner">
+    <div class="filter-chips">
+      <button class="chip active" data-filter="all">All Properties</button>
+      <button class="chip" data-filter="plot">Plots</button>
+      <button class="chip" data-filter="villa">Villas</button>
+      <button class="chip" data-filter="house">Houses</button>
+      <button class="chip" data-filter="apartment">Apartments</button>
+      <button class="chip" data-filter="commercial">Commercial</button>
+    </div>
+    <span class="filter-count" id="prop-count-label"></span>
+  </div>
+</div>
+
+<!-- ── PROPERTIES GRID ── -->
+<main class="prop-page-main">
+  <div class="prop-grid" id="prop-grid">
+    <!-- Cards rendered by JS -->
+  </div>
+</main>
+
+<!-- ── CONTACT CTA ── -->
+<section class="prop-cta-section">
+  <h2>Don't See What You're Looking For?</h2>
+  <h2 style="margin-top:-.3rem"><span>We Have More Listings</span> — Call Us</h2>
+  <p>B. Pentayya Reddy has an extensive network of off-market properties. Call for a free consultation.</p>
+  <div class="cta-btns">
+    <a href="tel:9705534038" class="cta-btn-primary">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 012.01 1.18 2 2 0 014 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      Call: 9705534038
+    </a>
+    <a href="https://wa.me/919705534038?text=Hi%2C%20I%20am%20looking%20for%20property%20in%20Visakhapatnam.%20Please%20share%20listings." class="cta-btn-outline" target="_blank" rel="noopener">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp Us
+    </a>
+    <a href="index.html#contact" class="cta-btn-outline">Send Enquiry</a>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="prop-footer">
+  <p>&copy; 2025 Pranav Sai Real Estate Consultancy. All rights reserved. | <a href="index.html">Home</a> | <a href="index.html#contact">Contact</a></p>
+  <p style="margin-top:.4rem;font-size:.72rem;">1-112-26, Beside Sarvani Sweets, Ushodaya Junction, MVP Colony, Visakhapatnam – 530 017</p>
+</footer>
+
+<!-- ── MOBILE STICKY BAR ── -->
+<div class="mobile-bar">
+  <a href="tel:9705534038" class="mb-call">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 012.01 1.18 2 2 0 014 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+    Call Now
+  </a>
+  <a href="https://wa.me/919705534038" class="mb-wa" target="_blank" rel="noopener">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    WhatsApp
+  </a>
+</div>
+
+<script>
+'use strict';
+
+const TYPE_LABELS   = { plot:'Plot', villa:'Villa', apartment:'Apartment', house:'House', commercial:'Commercial' };
+const STATUS_LABELS = { available:'Available', featured:'Featured', new:'New', hot:'Hot Deal', sold:'SOLD OUT' };
+const BADGE_CLASSES = { available:'badge-available', featured:'badge-featured', new:'badge-new', hot:'badge-hot', sold:'badge-sold' };
+
+let allProperties = [];
+let currentFilter = 'all';
+
+/* ── Load properties from admin localStorage only ── */
+function loadProperties() {
+  allProperties = JSON.parse(localStorage.getItem('ps_properties') || '[]');
+  renderGrid();
+}
+
+/* ── Render grid ── */
+function renderGrid() {
+  const grid = document.getElementById('prop-grid');
+  const label = document.getElementById('prop-count-label');
+  let props = allProperties;
+  if (currentFilter !== 'all') props = props.filter(p => p.type === currentFilter);
+
+  if (label) label.textContent = `${props.length} propert${props.length === 1 ? 'y' : 'ies'} found`;
+
+  if (props.length === 0) {
+    grid.innerHTML = `
+      <div class="no-results">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+        <h3>No properties listed yet</h3>
+        <p>Call us directly for the latest available properties in Visakhapatnam.</p>
+        <a href="tel:9705534038" style="display:inline-flex;align-items:center;gap:.5rem;margin-top:1.2rem;padding:.7rem 1.8rem;background:var(--gold);color:#111;font-weight:700;border-radius:8px;text-decoration:none;">&#9742; Call: 9705534038</a>
+      </div>`;
+    return;
+  }
+
+  grid.innerHTML = props.map(p => {
+    const isSold    = p.status === 'sold';
+    const badgeClass = BADGE_CLASSES[p.status] || 'badge-available';
+    const contact   = p.contact || '9705534038';
+    const waMsg     = encodeURIComponent(`Hi, I am interested in the property "${p.title}" listed on your website. Please share more details.`);
+
+    const imgHtml = p.photo
+      ? `<img src="${p.photo}" alt="${escHtml(p.title)}" class="pcard-img" loading="lazy"/>`
+      : `<div class="pcard-no-img">
+           <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+           <span>No Photo Available</span>
+         </div>`;
+
+    const specsHtml = [
+      p.beds && `<span class="pcard-spec"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 012 2v10"/><path d="M2 17h20"/></svg>${escHtml(p.beds)}</span>`,
+      p.area && `<span class="pcard-spec"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h4M3 15h6M9 3v4M15 3v6"/></svg>${escHtml(p.area)}</span>`,
+      p.badgeText && `<span class="pcard-spec">${escHtml(p.badgeText)}</span>`,
+    ].filter(Boolean).join('');
+
+    return `
+    <div class="pcard" data-type="${escHtml(p.type)}">
+      <div class="pcard-img-wrap">
+        ${imgHtml}
+        ${isSold ? `<div class="pcard-sold-overlay"><div class="sold-stamp">SOLD OUT</div></div>` : ''}
+        <div class="pcard-badge ${badgeClass}">${STATUS_LABELS[p.status] || p.status}</div>
+        <div class="pcard-type-tag">${TYPE_LABELS[p.type] || p.type}</div>
+        ${!isSold ? `<div class="pcard-enquire"><a href="index.html#contact">Enquire Now</a></div>` : ''}
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-type">${TYPE_LABELS[p.type] || p.type}</div>
+        <h3 class="pcard-title">${escHtml(p.title)}</h3>
+        <div class="pcard-location">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          ${escHtml(p.location)}
+        </div>
+        ${specsHtml ? `<div class="pcard-specs">${specsHtml}</div>` : ''}
+        ${p.desc ? `<p class="pcard-desc">${escHtml(p.desc.slice(0,120))}${p.desc.length>120?'…':''}</p>` : ''}
+        <div class="pcard-footer">
+          ${isSold
+            ? `<span class="pcard-sold-text">SOLD OUT</span>`
+            : `<div class="pcard-price">${p.price ? escHtml(p.price) : 'Price on Request'}</div>`}
+          ${!isSold ? `
+          <div class="pcard-cta">
+            <a href="tel:${escHtml(contact)}" class="pcard-call">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 012.01 1.18 2 2 0 014 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+              Call
+            </a>
+            <a href="https://wa.me/91${escHtml(contact)}?text=${waMsg}" class="pcard-wa" target="_blank" rel="noopener">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              WA
+            </a>
+          </div>` : ''}
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ── Filter chips ── */
+document.querySelectorAll('.chip').forEach(chip => {
+  chip.addEventListener('click', function() {
+    document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+    this.classList.add('active');
+    currentFilter = this.dataset.filter || 'all';
+    renderGrid();
+  });
+});
+
+/* ── XSS escape ── */
+function escHtml(str) {
+  return String(str || '')
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ── Init ── */
+loadProperties();
+</script>
+</body>
+</html>

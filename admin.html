@@ -65,6 +65,11 @@
         Enquiries
         <span class="sidebar-badge" id="unread-badge">0</span>
       </a>
+      <a href="#" class="sidebar-link" data-view="properties" id="nav-properties">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Properties
+        <span class="sidebar-badge" id="prop-count-badge" style="background:var(--gold)">0</span>
+      </a>
       <a href="#" class="sidebar-link" data-view="visitors" id="nav-visitors">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         Visitors
@@ -267,6 +272,30 @@
       </div>
     </div>
 
+    <!-- ── PROPERTIES VIEW ── -->
+    <div class="view" id="view-properties">
+      <div class="card">
+        <div class="card-head">
+          <h3>Manage Properties</h3>
+          <button class="card-btn" id="add-property-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add Property
+          </button>
+        </div>
+        <div class="prop-admin-filters" style="padding:0 20px 16px; display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="filter-pill active" data-pfilter="all">All</button>
+          <button class="filter-pill" data-pfilter="plot">Plots</button>
+          <button class="filter-pill" data-pfilter="villa">Villas</button>
+          <button class="filter-pill" data-pfilter="apartment">Apartments</button>
+          <button class="filter-pill" data-pfilter="house">Houses</button>
+          <button class="filter-pill" data-pfilter="commercial">Commercial</button>
+        </div>
+        <div class="prop-admin-grid" id="prop-admin-grid">
+          <div class="empty-prop-msg">No properties added yet. Click "Add Property" to get started.</div>
+        </div>
+      </div>
+    </div>
+
   </main>
 </div>
 
@@ -288,6 +317,92 @@
         WhatsApp
       </a>
       <button class="modal-action-btn mark-read" id="modal-mark-read">Mark as Read</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── PROPERTY ADD/EDIT MODAL ── -->
+<div class="modal-overlay" id="property-modal" aria-hidden="true">
+  <div class="modal-card" style="max-width:640px; max-height:92vh; overflow-y:auto;">
+    <div class="modal-header">
+      <h3 id="prop-modal-title">Add New Property</h3>
+      <button class="modal-close" id="prop-modal-close" aria-label="Close">&times;</button>
+    </div>
+    <div class="modal-body" style="padding:24px;">
+      <form id="prop-form" novalidate>
+        <input type="hidden" id="prop-edit-id" value="">
+
+        <!-- Photo Upload -->
+        <div class="prop-photo-upload" id="prop-photo-area">
+          <img id="prop-photo-preview" src="" alt="" style="display:none; width:100%; height:180px; object-fit:cover; border-radius:8px; margin-bottom:10px;"/>
+          <label class="upload-label" for="prop-photo-input">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span id="upload-label-text">Click to upload property photo</span>
+          </label>
+          <input type="file" id="prop-photo-input" accept="image/*" style="display:none;">
+        </div>
+
+        <div class="prop-form-grid">
+          <div class="prop-form-group full">
+            <label for="prop-title">Property Title *</label>
+            <input type="text" id="prop-title" placeholder="e.g. Luxury Villa – MVP Colony" required/>
+          </div>
+          <div class="prop-form-group">
+            <label for="prop-type">Property Type *</label>
+            <select id="prop-type" required>
+              <option value="">Select Type</option>
+              <option value="plot">Plot / Land</option>
+              <option value="villa">Villa / Bungalow</option>
+              <option value="apartment">Apartment / Flat</option>
+              <option value="house">Independent House</option>
+              <option value="commercial">Commercial Space</option>
+            </select>
+          </div>
+          <div class="prop-form-group">
+            <label for="prop-status-sel">Status</label>
+            <select id="prop-status-sel">
+              <option value="available">Available</option>
+              <option value="sold">SOLD OUT</option>
+              <option value="featured">Featured</option>
+              <option value="new">New Listing</option>
+              <option value="hot">Hot Deal</option>
+            </select>
+          </div>
+          <div class="prop-form-group full">
+            <label for="prop-location">Location *</label>
+            <input type="text" id="prop-location" placeholder="e.g. MVP Colony, Visakhapatnam" required/>
+          </div>
+          <div class="prop-form-group">
+            <label for="prop-price">Price</label>
+            <input type="text" id="prop-price" placeholder="e.g. ₹45 Lakhs onwards"/>
+          </div>
+          <div class="prop-form-group">
+            <label for="prop-area">Area / Size</label>
+            <input type="text" id="prop-area" placeholder="e.g. 200 sq.yd or 1800 sq.ft"/>
+          </div>
+          <div class="prop-form-group">
+            <label for="prop-beds">Bedrooms</label>
+            <input type="text" id="prop-beds" placeholder="e.g. 3 BHK (leave blank for plots)"/>
+          </div>
+          <div class="prop-form-group">
+            <label for="prop-contact">Contact Number</label>
+            <input type="tel" id="prop-contact" placeholder="e.g. 9705534038"/>
+          </div>
+          <div class="prop-form-group full">
+            <label for="prop-desc">Description</label>
+            <textarea id="prop-desc" rows="4" placeholder="Describe the property – features, amenities, nearby landmarks…"></textarea>
+          </div>
+          <div class="prop-form-group full">
+            <label for="prop-badge-text">Badge Text (optional)</label>
+            <input type="text" id="prop-badge-text" placeholder="e.g. DTCP Approved, Clear Title, Ready to Reg…"/>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:12px; margin-top:20px; justify-content:flex-end;">
+          <button type="button" class="card-btn" id="prop-cancel-btn">Cancel</button>
+          <button type="submit" class="card-btn" style="background:var(--gold); color:#111;" id="prop-save-btn">Save Property</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

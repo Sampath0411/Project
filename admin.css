@@ -677,3 +677,156 @@ button { font-family: var(--font); }
   .stat-info { align-items: flex-end; text-align: right; }
   .login-brand { font-size: 1rem; }
 }
+
+/* ═══════════════════════════════════════════════
+   ── PROPERTY MANAGEMENT STYLES ──
+   ═══════════════════════════════════════════════ */
+
+:root {
+  --surface-2: #f1f5f9;
+  --text-3:    #94a3b8;
+}
+
+/* Filter pills */
+.filter-pill {
+  padding: .35rem 1rem;
+  background: var(--off-white);
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  font-size: .8rem; font-weight: 600;
+  color: var(--text-sec); cursor: pointer;
+  transition: all .2s;
+  font-family: var(--font);
+}
+.filter-pill:hover { border-color: var(--gold); color: var(--gold); }
+.filter-pill.active {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #111;
+}
+
+/* Property admin grid */
+.prop-admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.2rem;
+  padding: 0 1.2rem 1.2rem;
+}
+
+.empty-prop-msg {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--text-muted);
+  font-size: .9rem;
+}
+
+/* Property admin card */
+.prop-admin-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform .2s, box-shadow .2s;
+}
+.prop-admin-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+.prop-admin-card.is-sold {
+  opacity: .85;
+  border-color: #fca5a5;
+}
+
+.prop-admin-body {
+  padding: 1rem;
+  display: flex; flex-direction: column; gap: .5rem;
+}
+
+.prop-admin-title {
+  font-size: .95rem; font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.prop-admin-location {
+  display: flex; align-items: center; gap: .35rem;
+  font-size: .78rem; color: var(--text-sec);
+}
+
+.prop-admin-price {
+  font-size: 1rem; font-weight: 700;
+  color: var(--gold);
+}
+
+.prop-admin-desc {
+  font-size: .78rem; color: var(--text-sec);
+  line-height: 1.5;
+}
+
+.prop-admin-actions {
+  display: flex; flex-wrap: wrap; gap: .4rem;
+  margin-top: .4rem;
+  padding-top: .6rem;
+  border-top: 1px solid var(--border);
+}
+
+/* Photo upload area */
+.prop-photo-upload {
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color .2s;
+  margin-bottom: 1rem;
+}
+.prop-photo-upload:hover { border-color: var(--gold); }
+
+.upload-label {
+  display: flex; flex-direction: column; align-items: center; gap: .5rem;
+  cursor: pointer; color: var(--text-muted); font-size: .82rem;
+  transition: color .2s;
+}
+.upload-label:hover { color: var(--gold); }
+.upload-label svg { opacity: .5; }
+
+/* Property form grid */
+.prop-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .9rem;
+}
+
+.prop-form-group { display: flex; flex-direction: column; gap: .4rem; }
+.prop-form-group.full { grid-column: 1 / -1; }
+
+.prop-form-group label {
+  font-size: .75rem; font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: .05em;
+}
+
+.prop-form-group input,
+.prop-form-group select,
+.prop-form-group textarea {
+  padding: .65rem .9rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: .88rem; color: var(--text-primary);
+  font-family: var(--font); outline: none;
+  background: var(--white);
+  transition: border-color .2s;
+}
+.prop-form-group input:focus,
+.prop-form-group select:focus,
+.prop-form-group textarea:focus { border-color: var(--gold); }
+.prop-form-group textarea { resize: vertical; min-height: 90px; }
+
+/* Responsive property grid */
+@media (max-width: 768px) {
+  .prop-admin-grid { grid-template-columns: 1fr; }
+  .prop-form-grid  { grid-template-columns: 1fr; }
+  .prop-form-group.full { grid-column: 1; }
+}
