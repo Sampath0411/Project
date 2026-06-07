@@ -400,7 +400,7 @@
       <div class="about-grid">
         <div class="about-visual">
           <div class="about-img-wrap">
-            <img src="images/agent.png" alt="B. Pentayya Reddy – Real Estate Consultant at Pranav Sai Real Estate Consultancy" class="about-img" loading="lazy"/>
+            <img src="images/agent.jpeg" alt="B. Pentayya Reddy – Real Estate Consultant at Pranav Sai Real Estate Consultancy" class="about-img" loading="lazy"/>
             <div class="about-img-badge">
               <span class="badge-icon-wrap">
                 <svg width="22" height="22"><use href="#ico-award"/></svg>
@@ -606,9 +606,13 @@
       const contact   = p.contact || '9705534038';
       const waMsg     = encodeURIComponent('Hi, I am interested in the property "' + p.title + '". Please share more details.');
 
+      let fallbackImg = 'images/property_villa.png';
+      if (p.type === 'plot') fallbackImg = 'images/property_plot.png';
+      else if (p.type === 'apartment') fallbackImg = 'images/property_apartment.png';
+
       const imgHtml = p.photo
         ? `<img src="${p.photo}" alt="${escH(p.title)}" loading="lazy"/>`
-        : `<img src="images/property_villa.png" alt="${escH(p.title)}" loading="lazy"/>`;
+        : `<img src="${fallbackImg}" alt="${escH(p.title)}" loading="lazy"/>`;
 
       const specsHtml = [
         p.beds && `<span class="spec-item"><svg width="13" height="13"><use href="#ico-bed"/></svg>${escH(p.beds)}</span>`,
