@@ -466,6 +466,27 @@ if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
   });
 })();
 
+/* ── WHATSAPP INTEGRATION CONFIG ── */
+const ADMIN_WHATSAPP = '919705534038';
+
+/* ── SEND ENQUIRY TO WHATSAPP ── */
+function sendToWhatsApp(enquiryData) {
+  const { name, phone, type, budget, message } = enquiryData;
+  
+  let whatsappMessage = `*New Enquiry from Website*\n\n`;
+  whatsappMessage += `*Name:* ${name}\n`;
+  whatsappMessage += `*Phone:* ${phone}\n`;
+  if (type) whatsappMessage += `*Property Type:* ${type}\n`;
+  if (budget) whatsappMessage += `*Budget:* ${budget}\n`;
+  if (message) whatsappMessage += `*Message:* ${message}\n`;
+  
+  const encodedMsg = encodeURIComponent(whatsappMessage);
+  const waLink = `https://wa.me/${ADMIN_WHATSAPP}?text=${encodedMsg}`;
+  
+  /* Open WhatsApp with pre-filled message */
+  window.open(waLink, '_blank');
+}
+
 /* ── CONTACT FORM ── */
 const form = document.getElementById('contact-form');
 if (form) {
@@ -486,20 +507,22 @@ if (form) {
     if (btn) { btn.textContent = 'Sending…'; btn.disabled = true; }
 
     setTimeout(() => {
-      /* ── Save enquiry to localStorage for admin panel ── */
+      const enquiryData = {
+        timestamp: new Date().toISOString(),
+        name:    name    ? name.value.trim()    : '',
+        phone:   phone   ? phone.value.trim()   : '',
+        type:    type    ? type.value           : '',
+        budget:  budget  ? budget.value         : '',
+        message: message ? message.value.trim() : '',
+        status: 'new',
+      };
+
+      /* ── Send enquiry to WhatsApp ── */
       try {
-        const enquiries = JSON.parse(localStorage.getItem('ps_enquiries') || '[]');
-        enquiries.push({
-          timestamp: new Date().toISOString(),
-          name:    name    ? name.value.trim()    : '',
-          phone:   phone   ? phone.value.trim()   : '',
-          type:    type    ? type.value           : '',
-          budget:  budget  ? budget.value         : '',
-          message: message ? message.value.trim() : '',
-          status: 'new',
-        });
-        localStorage.setItem('ps_enquiries', JSON.stringify(enquiries));
-      } catch(err) {}
+        sendToWhatsApp(enquiryData);
+      } catch(err) {
+        console.error('Error sending to WhatsApp:', err);
+      }
 
       if (successEl) successEl.classList.add('visible');
       if (btn) {
@@ -641,20 +664,22 @@ document.querySelectorAll('#contact-form, #callback-form').forEach(f => {
     if (submitBtn) { submitBtn.textContent = 'Sending…'; submitBtn.disabled = true; }
 
     setTimeout(() => {
-      /* ── BUG FIX: Save callback enquiry to localStorage so it appears in admin panel ── */
+      const enquiryData = {
+        timestamp: new Date().toISOString(),
+        name:    nameEl.value.trim(),
+        phone:   phoneEl.value.trim(),
+        type:    'Callback Request',
+        budget:  timeEl ? timeEl.value : '',
+        message: timeEl ? `Preferred callback time: ${timeEl.value || 'Not specified'}` : 'Callback request from sidebar form',
+        status:  'new',
+      };
+
+      /* ── Send callback enquiry to WhatsApp ── */
       try {
-        const enquiries = JSON.parse(localStorage.getItem('ps_enquiries') || '[]');
-        enquiries.push({
-          timestamp: new Date().toISOString(),
-          name:    nameEl.value.trim(),
-          phone:   phoneEl.value.trim(),
-          type:    'Callback Request',
-          budget:  timeEl ? timeEl.value : '',
-          message: timeEl ? `Preferred callback time: ${timeEl.value || 'Not specified'}` : 'Callback request from sidebar form',
-          status:  'new',
-        });
-        localStorage.setItem('ps_enquiries', JSON.stringify(enquiries));
-      } catch(err) {}
+        sendToWhatsApp(enquiryData);
+      } catch(err) {
+        console.error('Error sending to WhatsApp:', err);
+      }
 
       if (success) success.classList.add('visible');
       if (submitBtn) { submitBtn.textContent = '✆ Request Callback'; submitBtn.disabled = false; }
